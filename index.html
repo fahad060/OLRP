@@ -2,173 +2,799 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>قوانين OLRP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLRP Server - قوانين الحياة الواقعية</title>
     <style>
-        body {
-            background: #0d0d0d;
-            color: #fff;
-            font-family: sans-serif;
-            padding: 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .rule-section {
-            margin-bottom: 10px;
-            border: 1px solid #333;
-            border-radius: 8px;
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(234, 88, 12, 0.2);
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.3s;
+        }
+
+        .logo-section:hover {
+            opacity: 0.8;
+        }
+
+        .logo-img {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #fb923c, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #fb923c;
+        }
+
+        nav a.active {
+            color: #fb923c;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 5rem 0;
             overflow: hidden;
         }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(234, 88, 12, 0.2), transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+
+        .logo-hero {
+            width: 8rem;
+            height: 8rem;
+            margin: 0 auto 2rem;
+            display: block;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.75rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fb923c, #f97316, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button, .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #f97316, #ea580c);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #ea580c, #c2410c);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 2px solid #ea580c;
+            color: #fb923c;
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(234, 88, 12, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(234, 88, 12, 0.2);
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #fb923c;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.2), rgba(234, 88, 12, 0.1));
+            border: 1px solid rgba(234, 88, 12, 0.2);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(234, 88, 12, 0.4);
+            box-shadow: 0 10px 25px rgba(234, 88, 12, 0.1);
+        }
+
+        .feature-icon {
+            width: 2rem;
+            height: 2rem;
+            margin-bottom: 1rem;
+            color: #fb923c;
+        }
+
+        .feature-card h3 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: #fca45d;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: #d1d5db;
+            font-size: 0.875rem;
+        }
+
+        /* Rules Section */
+        .rules-section {
+            padding: 4rem 0;
+            background: linear-gradient(to bottom, transparent, rgba(234, 88, 12, 0.1));
+        }
+
+        .rules-container {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+
+        .rule-section {
+            border: 1px solid rgba(234, 88, 12, 0.2);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .rule-section:hover {
+            border-color: rgba(234, 88, 12, 0.4);
+        }
+
         .rule-header {
             width: 100%;
-            background: #1a1a1a;
-            color: #ff9800;
-            padding: 12px;
-            font-size: 16px;
+            padding: 1.5rem;
+            background: linear-gradient(to right, rgba(234, 88, 12, 0.3), rgba(234, 88, 12, 0.2));
             border: none;
+            color: #fb923c;
+            font-size: 1.125rem;
+            font-weight: bold;
             cursor: pointer;
-            text-align: right;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
         }
-        .rule-header.active {
-            background: #262626;
+
+        .rule-header:hover {
+            background: linear-gradient(to right, rgba(234, 88, 12, 0.5), rgba(234, 88, 12, 0.4));
         }
+
+        .chevron {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #fb923c;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .rule-header.active .chevron {
+            transform: rotate(180deg);
+        }
+
         .rule-content {
             display: none;
-            padding: 10px;
-            background: #111;
+            padding: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.4);
         }
+
         .rule-content.active {
             display: block;
         }
+
         .rule-item {
-            padding: 10px 0;
-            border-bottom: 1px solid #222;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(234, 88, 12, 0.1);
+            margin-bottom: 0.75rem;
         }
+
         .rule-item:last-child {
             border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
+
         .rule-item-title {
-            font-weight: bold;
-            color: #ff9800;
+            font-weight: 600;
+            color: #fca45d;
+            margin-bottom: 0.25rem;
         }
+
+        .rule-item-desc {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
         .rule-penalty {
             display: inline-block;
-            margin-top: 5px;
-            padding: 4px 10px;
-            background: #ff980033;
-            border: 1px solid #ff9800;
-            border-radius: 6px;
-            font-size: 12px;
+            font-size: 0.75rem;
+            background-color: rgba(234, 88, 12, 0.2);
+            color: #fca45d;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
         }
-        .chevron {
-            transition: 0.3s;
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(234, 88, 12, 0.2);
         }
-        .rule-header.active .chevron {
-            transform: rotate(180deg);
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #fb923c, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.25rem;
+            color: #d1d5db;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 4rem 0;
+            background: linear-gradient(to right, rgba(234, 88, 12, 0.3), rgba(234, 88, 12, 0.2));
+            border-top: 1px solid rgba(234, 88, 12, 0.2);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fb923c;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(234, 88, 12, 0.2);
+            padding: 2rem 0;
+            background-color: #000000;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button, .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo-section">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%23000' stroke='%23ea580c' stroke-width='8'/%3E%3Cpath d='M 100 50 L 130 70 L 130 130 L 100 150 L 70 130 L 70 70 Z' fill='%23f97316' stroke='%23ea580c' stroke-width='2'/%3E%3Cpath d='M 100 70 L 120 85 L 120 115 L 100 130 L 80 115 L 80 85 Z' fill='%23ea580c'/%3E%3Cpath d='M 80 50 Q 60 70 70 90' stroke='%23f97316' stroke-width='4' fill='none'/%3E%3Cpath d='M 120 160 Q 140 140 130 120' stroke='%23f97316' stroke-width='4' fill='none'/%3E%3C/svg%3E" alt="OLRP" class="logo-img">
+                <span class="logo-text">OLRP</span>
+            </a>
+            <nav>
+                <a href="#" class="active">الرئيسية</a>
+                <a href="#rules">القوانين</a>
+            </nav>
+        </div>
+    </header>
 
-<div id="rulesContainer"></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <svg class="logo-hero" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='95' fill='%23000' stroke='%23ea580c' stroke-width='8'/><path d='M 100 50 L 130 70 L 130 130 L 100 150 L 70 130 L 70 70 Z' fill='%23f97316' stroke='%23ea580c' stroke-width='2'/><path d='M 100 70 L 120 85 L 120 115 L 100 130 L 80 115 L 80 85 Z' fill='%23ea580c'/><path d='M 80 50 Q 60 70 70 90' stroke='%23f97316' stroke-width='4' fill='none'/><path d='M 120 160 Q 140 140 130 120' stroke='%23f97316' stroke-width='4' fill='none'/></svg>
+                <h1>OLRP Server</h1>
+                <p>انضم إلى أفضل سيرفر للحياة الواقعية (RP) وعش تجربة لعب لا تُنسى</p>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="document.getElementById('rules').scrollIntoView()">اقرأ القوانين</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='https://discord.gg/dxkR2gXAX8'">انضم الآن</button>
 
-<script>
-const rulesData = [
-    {
-        title: "القسم السادس: قوانين السلوك العام داخل السيرفر",
-        rules: [
-            { title: "تخريب الفعاليات الرسمية", desc: "إفساد أنشطة السيرفر الكبرى.", penalty: "باند 10 أيام" },
-            { title: "استخدام التلي بورت", desc: "الانتقال الآني غير المشروع.", penalty: "باند نهائي" },
-            { title: "إعطاء الحساب لشخص آخر", desc: "مشاركة بيانات الدخول.", penalty: "باند نهائي" },
-            { title: "الاعتراض على القوانين", desc: "الاعتراض داخل اللعبة.", penalty: "تحذير" },
-            { title: "استخدام الراديو وأنت ميت", desc: "التواصل اللاسلكي بعد الموت.", penalty: "باند 3 أيام" },
-            { title: "تجاهل أوامر الإداري", desc: "عدم الامتثال أثناء التحقيق.", penalty: "باند 7 أيام" },
-            { title: "الكذب على الإدارة", desc: "تقديم معلومات مضللة في التكت.", penalty: "باند 10 أيام" },
-            { title: "ملصقات مسيئة", desc: "وضع ملصقات غير لائقة على السيارات.", penalty: "باند 3 أيام" },
-            { title: "استخدام سكنات ضخمة/صغيرة", desc: "استخدام مظهر غير متناسق جداً.", penalty: "تحذير" },
-            { title: "القفز المتكرر (Bunny Hopping)", desc: "القفز لتسريع الحركة.", penalty: "تحذير" },
-            { title: "استخدام الشات للإساءة", desc: "الإساءة للسيرفر عبر الدردشة.", penalty: "باند نهائي" },
-            { title: "تحريض اللاعبين", desc: "تحريضهم على ترك السيرفر.", penalty: "باند نهائي" }
-        ]
-    },
-    {
-        title: "القسم السابع: قوانين العقارات والاقتصاد (Property & Economy)",
-        rules: [
-            { title: "غسيل الأموال", desc: "يجب أن يتم عبر سيناريو واقعي وليس مجرد ميكانيكا لعبة.", penalty: "باند 5 أيام" },
-            { title: "الاحتيال المالي الكبير", desc: "سرقة مبالغ ضخمة عبر وعود وهمية خارج نطاق RP.", penalty: "باند 10 أيام" },
-            { title: "استخدام المنازل للاختباء", desc: "الاختباء من الشرطة للأبد داخل المنزل.", penalty: "باند 3 أيام" },
-            { title: "التلاعب بأسعار السوق السوداء", desc: "التلاعب غير المشروع بالأسعار.", penalty: "باند 5 أيام" },
-            { title: "شراء العقارات بأسماء وهمية", desc: "عدم استخدام الاسم الحقيقي للشخصية.", penalty: "تحذير" },
-            { title: "استغلال نظام الرواتب (AFK Farming)", desc: "البقاء نشطاً دون لعب للحصول على الراتب.", penalty: "باند 3 أيام" },
-            { title: "تحويل الأموال بين الشخصيات", desc: "نقل المال بين شخصيات نفس اللاعب.", penalty: "باند نهائي" },
-            { title: "عدم دفع الضرائب (TAX)", desc: "عدم دفع الضرائب المفروض بها.", penalty: "باند 5 أيام" },
-            { title: "التهديد بمصادرة الأملاك", desc: "التهديد بدون سبب قانوني.", penalty: "باند 5 أيام" }
-        ]
-    },
-    {
-        title: "القسم الثامن: قوانين تطوير الشخصية والتمثيل (Character & Roleplay)",
-        rules: [
-            { title: "تغيير الشخصية للهروب", desc: "تغيير الشخصية لتجنب العقاب.", penalty: "باند 10 أيام" },
-            { title: "تمثيل الإصابة", desc: "يجب تمثيل الألم عند الحوادث أو إطلاق النار.", penalty: "باند يومين" },
-            { title: "استخدام الأدوات (Props)", desc: "استخدامها بطريقة غير واقعية.", penalty: "باند يوم" },
-            { title: "تجاهل الكاميرات", desc: "تجاهل وجود كاميرات مراقبة في الأماكن العامة.", penalty: "تحذير" },
-            { title: "التمثيل بأنك سوبر هيرو", desc: "القيام بأفعال خارقة للعادة.", penalty: "باند 5 أيام" },
-            { title: "عدم الالتزام بقصة الشخصية", desc: "مخالفة الـ Backstory الخاصة بك.", penalty: "تحذير" },
-            { title: "استخدام معلومات الستريم", desc: "استخدام معلومات البث المباشر (Stream Sniping).", penalty: "باند نهائي" },
-            { title: "التدخل في سيناريوهات الآخرين", desc: "التدخل بدون سبب.", penalty: "باند 3 أيام" },
-            { title: "إجبار اللاعبين على مشاهد غير لائقة", desc: "الإكراه على تمثيل مشاهد غير أخلاقية.", penalty: "باند نهائي" },
-            { title: "استخدام الكلبشات", desc: "استخدامها بدون سبب درامي.", penalty: "باند 3 أيام" },
-            { title: "الهروب من السجن", desc: "الهروب بطريقة غير واقعية.", penalty: "باند 7 أيام" },
-            { title: "تمثيل السكر المبالغ فيه", desc: "لغرض الإزعاج فقط.", penalty: "تحذير" },
-            { title: "استخدام الأقنعة", desc: "استخدامها في كل الأوقات بدون سبب.", penalty: "تحذير" },
-            { title: "تجاهل أوامر المفاوض", desc: "عدم الامتثال في السرقات.", penalty: "باند 3 أيام" },
-            { title: "الاعتراف بالجرائم (FailRP)", desc: "الاعتراف بدون ضغط درامي.", penalty: "باند يومين" }
-        ]
-    }
-];
+                </div>
+            </div>
+        </div>
+    </section>
 
-function createRulesSections() {
-    const container = document.getElementById('rulesContainer');
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">لماذا تختار OLRP؟</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>في حال واجهتك مشكله </h3>
+                    <p>الرجاء فتح تذكره لحل مشكلتك
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>الرجاء اللعب بنزاهه</h3>
+                    <p>يجب عليك اللعب بنزاهه و عدم التخريب و السب</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>استمتع بلعب </h3>
+                    <p>استمتع بلعب و اخلق اجواء جميله و وقت رائع </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>نشكركم لاختيراكم OLRP </h3>
+                    <p>شكرا لكم</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    rulesData.forEach((section, index) => {
-        const sectionDiv = document.createElement('div');
-        sectionDiv.className = 'rule-section';
+    <!-- Rules Section -->
+    <section class="rules-section" id="rules">
+        <div class="container">
+            <h2 class="section-title">قوانين سيرفر OLRP</h2>
+            <div class="rules-container" id="rulesContainer"></div>
+        </div>
+    </section>
 
-        const header = document.createElement('button');
-        header.className = 'rule-header';
-        header.innerHTML = `
-            <span>${section.title}</span>
-            <span class="chevron">▼</span>
-        `;
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>مسؤولين  السيرفر بشكل كامل</h3>
+                    <p>yghe
+                    e.9d
+                    f78o
+                    .plwa </p>
+                </div>
+                <div class="stat-item">
+                    <h3>band manegar</h3>
+                    <p>f78o</p>
+                </div>
+                <div class="stat-item">
+                    <h3>strategy</h3>
+                    <p>e.9d</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        const content = document.createElement('div');
-        content.className = 'rule-content';
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>هل انت مستعد  ؟ </h2>
+            <p>نرحب بكم في السيرفر OLD LIFE</p>
+            <button class="btn btn-primary">ابدأ الآن</button>
+        </div>
+    </section>
 
-        section.rules.forEach(rule => {
-            const item = document.createElement('div');
-            item.className = 'rule-item';
-            item.innerHTML = `
-                <div class="rule-item-title">${rule.title}</div>
-                <div>${rule.desc}</div>
-                <span class="rule-penalty">${rule.penalty}</span>
-            `;
-            content.appendChild(item);
-        });
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 OLRP Server. جميع الحقوق محفوظة.</p>
+            <p style="font-size: 0.875rem;">تم إنشاء بواسطة  f78o </p>
+        </div>
+    </footer>
 
-        header.addEventListener('click', () => {
-            header.classList.toggle('active');
-            content.classList.toggle('active');
-        });
+    <script>
+        const rulesData = [
+            {
+                title: "القسم الأول: القوانين العامة والأساسية (General Rules)",
+                rules: [
+                    { title: "الاحترام المتبادل", desc: "يجب احترام جميع اللاعبين والإداريين.", penalty: "باند 1 أيام" },
+                    { title: "تقمص الشخصية (Roleplay)", desc: "يجب البقاء داخل الشخصية في جميع الأوقات.", penalty: "تحذير / باند يوم" },
+                    { title: "خارج الشخصية (OOC)", desc: "يمنع التحدث عن أمور خارج اللعبة في الدردشة الصوتية.", penalty: "تحذير" },
+                    { title: "الميتا جينمنج (Metagaming)", desc: "يمنع استخدام معلومات حصلت عليها خارج اللعبة (مثل الديسكورد) داخل اللعبة.", penalty: "باند 7 أيام" },
+                    { title: "الباور جينمنج (Powergaming)", desc: "يمنع القيام بأفعال غير واقعية أو إجبار اللاعبين على سيناريو معين دون منحهم فرصة للرد.", penalty: "باند 5 أيام" },
+                    { title: "قيمة الحياة (Value of Life)", desc: "يجب عليك الخوف على حياتك كما في الواقع (مثلاً عند تهديدك بسلاح).", penalty: "باند 3 أيام" },
+                    { title: "قانون الحياة الجديدة (NLR)", desc: "عند موتك، تنسى جميع أحداث السيناريو الذي أدى لموتك ولا يمكنك العودة لموقع الحادث لمدة 15 دقيقة.", penalty: "باند يومين" },
+                    { title: "تخريب السيناريو (FailRP)", desc: "يمنع القيام بأي فعل يفسد واقعية السيناريو.", penalty: "باند 3 أيام" },
+                    { title: "الهروب من السيناريو (Combat Logging)", desc: "يمنع الخروج من السيرفر أثناء سيناريو قائم (مثل مطاردة أو تحقيق).", penalty: "باند 7 أيام" },
+                    { title: "استغلال الثغرات (Exploiting)", desc: "يمنع استخدام أي ثغرة في البرمجة لصالحك.", penalty: "باند نهائي" },
+                    { title: "الهاك والغش (Cheating)", desc: "استخدام أي برامج خارجية.", penalty: "باند نهائي" },
+                    { title: "انتحال شخصية الإدارة", desc: "يمنع الادعاء بأنك إداري.", penalty: "باند نهائي" },
+                    { title: "إزعاج اللاعبين (Trolling)", desc: "القيام بأفعال تهدف فقط لإزعاج الآخرين.", penalty: "باند 3 أيام" },
+                    { title: "العنصرية والتمييز", desc: "يمنع منعاً باتاً أي شكل من أشكال العنصرية.", penalty: "باند نهائي" },
+                    { title: "التحرش", desc: "يمنع التحرش اللفظي أو السلوكي بجميع أنواعه.", penalty: "باند نهائي" },
+                    { title: "الأسماء الواقعية", desc: "يجب أن يكون اسم الشخصية واقعياً (اسم أول وعائلة).", penalty: "تحذير / تغيير الاسم" },
+                    { title: "لغة السيرفر", desc: "التحدث بلغة غير لغة السيرفر.", penalty: "تحذير" },
+                    { title: "الإعلانات", desc: "يمنع الإعلان عن سيرفرات أخرى.", penalty: "باند نهائي" },
+                    { title: "بيع الممتلكات", desc: "بيع الممتلكات مقابل مال حقيقي.", penalty: "باند نهائي" },
+                    { title: "التدخل في شؤون الإدارة", desc: "التدخل غير المصرح به في عمل الإدارة.", penalty: "باند 3 أيام" }
+                ]
+            },
+            {
+                title: "القسم الثاني: قوانين القتال والجرائم (Combat & Crime)",
+                rules: [
+                    { title: "القتل العشوائي (RDM)", desc: "يمنع قتل أي لاعب دون سبب درامي واضح وسيناريو مسبق.", penalty: "باند 7 أيام" },
+                    { title: "الدهس العشوائي (VDM)", desc: "يمنع استخدام المركبة كسلاح لدهس اللاعبين.", penalty: "باند 5 أيام" },
+                    { title: "السرقة العشوائية", desc: "يمنع سرقة اللاعبين دون سبب مقنع.", penalty: "باند 3 أيام" },
+                    { title: "خطف المسعفين", desc: "يمنع منعاً باتاً خطف أو قتل المسعفين أثناء تأدية عملهم.", penalty: "باند 10 أيام" },
+                    { title: "خطف الميكانيكيين", desc: "يمنع خطف الميكانيكي أثناء العمل.", penalty: "باند 5 أيام" },
+                    { title: "المناطق الآمنة (Safe Zones)", desc: "يمنع القيام بأي عمل إجرامي داخل المناطق المحددة كآمنة (مثل المستشفى، مركز الشرطة).", penalty: "باند 7 أيام" },
+                    { title: "التمثيل بالمجني عليه", desc: "يمنع القيام بأفعال مهينة للجثة.", penalty: "باند 10 أيام" },
+                    { title: "استخدام الأسلحة الثقيلة", desc: "يمنع استخدامها إلا بسيناريو خاص أو تصريح.", penalty: "باند 5 أيام" },
+                    { title: "السرقة بعد الإنعاش", desc: "يمنع سرقة شخص قام المسعف بإنعاشه فوراً.", penalty: "باند 3 أيام" },
+                    { title: "طلب الفدية المبالغ فيه", desc: "يجب الالتزام بحدود الفدية التي تحددها الإدارة.", penalty: "باند 3 أيام" },
+                    { title: "عدد الرهائن", desc: "يمنع أخذ أكثر من عدد معين من الرهائن في السرقات الصغيرة.", penalty: "باند يومين" },
+                    { title: "التهديد بالقتل بدون سبب", desc: "التهديد غير المبرر.", penalty: "باند 3 أيام" },
+                    { title: "استخدام الرهائن الوهميين (NPCs)", desc: "استخدام الشخصيات غير اللاعبة كرهائن.", penalty: "باند 5 أيام" },
+                    { title: "الاتفاق مع الرهينة", desc: "يمنع الاتفاق مع صديق ليكون رهينة لك.", penalty: "باند 7 أيام" },
+                    { title: "إطلاق النار على الإطارات", desc: "إطلاق النار بدون تحذير.", penalty: "باند يومين" },
+                    { title: "السرقة المتكررة", desc: "السرقة المتكررة لنفس الشخص.", penalty: "باند 5 أيام" },
+                    { title: "استخدام الدروع", desc: "استخدام الدروع في سيناريوهات غير قتالية.", penalty: "تحذير" },
+                    { title: "إخفاء الأسلحة", desc: "إخفاء الأسلحة بطريقة غير واقعية.", penalty: "باند يوم" },
+                    { title: "عدم الاستجابة لطلب ارفع يدك", desc: "تجاهل أوامر التهديد.", penalty: "باند 3 أيام" },
+                    { title: "القتل فور رفع اليد", desc: "إذا استسلم الشخص يمنع قتله إلا لسبب قوي جداً.", penalty: "باند 5 أيام" }
+                ]
+            },
+            {
+                title: "القسم الثالث: قوانين المركبات والقيادة (Vehicles)",
+                rules: [
+                    { title: "القيادة غير الواقعية (Non-RP Driving)", desc: "مثل القيادة في الجبال بسيارات رياضية.", penalty: "باند يوم" },
+                    { title: "صدم السيارات عمداً (Ramming)", desc: "تعمد صدم مركبات الآخرين.", penalty: "باند يومين" },
+                    { title: "استخدام سيارات الوظائف", desc: "استخدامها لأغراض شخصية.", penalty: "باند يوم" },
+                    { title: "سرقة سيارات الشرطة/الإسعاف", desc: "يمنع سرقتها إلا بسيناريو كبير وموافقة إدارية أحياناً.", penalty: "باند 5 أيام" },
+                    { title: "تصليح السيارة أثناء المطاردة", desc: "استخدام الميكانيكي أو الأدوات أثناء الهرب.", penalty: "باند 7 أيام" },
+                    { title: "الاختباء داخل الكراج", desc: "الاختباء أثناء المطاردة.", penalty: "باند 7 أيام" },
+                    { title: "القيادة بعجلات منقوبة", desc: "الاستمرار في القيادة رغم تلف الإطارات.", penalty: "باند يوم" },
+                    { title: "القفز بالسيارة (Stunt Driving)", desc: "القفز من أماكن مرتفعة.", penalty: "باند يومين" },
+                    { title: "ركن السيارات", desc: "ركنها في أماكن تعيق الحركة.", penalty: "سحب المركبة / غرامة" },
+                    { title: "استخدام الهيدروليك", desc: "استخدامه بطريقة مزعجة.", penalty: "تحذير" },
+                    { title: "تغيير لون السيارة أثناء المطاردة", desc: "محاولة تضليل الشرطة بطريقة غير قانونية.", penalty: "باند 5 أيام" },
+                    { title: "القيادة عكس السير", desc: "القيادة بسرعة جنونية عكس الاتجاه.", penalty: "باند يوم" },
+                    { title: "استخدام الدراجات النارية", desc: "استخدامها في صعود الدرج.", penalty: "باند يوم" },
+                    { title: "سرقة سيارات اللاعبين", desc: "سرقتها في المناطق الآمنة.", penalty: "باند 7 أيام" },
+                    { title: "تفجير السيارات", desc: "تفجير المركبات بدون سبب.", penalty: "باند 3 أيام" },
+                    { title: "استخدام الشاحنات الكبيرة", desc: "استخدامها لغلق الطرق عمداً.", penalty: "باند 3 أيام" },
+                    { title: "الجلوس فوق سقف السيارة", desc: "الجلوس وهي تتحرك.", penalty: "باند يوم" },
+                    { title: "صدم حواجز الشرطة", desc: "صدمها بسرعة عالية جداً.", penalty: "باند يومين" },
+                    { title: "استخدام الطائرات", desc: "استخدامها بدون رخصة طيران.", penalty: "باند 3 أيام" },
+                    { title: "الهبوط بالطائرة", desc: "الهبوط في وسط الشارع.", penalty: "باند 5 أيام" }
+                ]
+            },
+            {
+                title: "القسم الرابع: قوانين التفاعل والدردشة (Interaction & Chat)",
+                rules: [
+                    { title: "السب والقذف", desc: "استخدام ألفاظ نابية تجاه الآخرين.", penalty: "باند 7 أيام" },
+                    { title: "إزعاج الميكروفون (Mic Spamming)", desc: "إصدار أصوات مزعجة.", penalty: "باند يوم" },
+                    { title: "استخدام مغير الصوت", desc: "استخدامه بطريقة غير واقعية.", penalty: "تحذير / باند يوم" },
+                    { title: "التحدث أثناء الموت", desc: "يمنع التحدث إذا كنت فاقداً للوعي إلا بكلمات بسيطة تعبر عن الألم.", penalty: "باند يومين" },
+                    { title: "استخدام الرموز التعبيرية", desc: "استخدامها بشكل مفرط في الشات.", penalty: "تحذير" },
+                    { title: "التنمر على اللاعبين الجدد", desc: "استهداف المبتدئين.", penalty: "باند 5 أيام" },
+                    { title: "إفشاء معلومات خاصة (Doxxing)", desc: "نشر معلومات شخصية عن اللاعبين.", penalty: "باند نهائي" },
+                    { title: "التهديد في الواقع", desc: "نقل التهديد من اللعبة إلى الحقيقة.", penalty: "باند نهائي" },
+                    { title: "استخدام الشات العالمي", desc: "استخدامه لأمور خاصة.", penalty: "تحذير" },
+                    { title: "السخرية من ذوي الاحتياجات", desc: "يمنع منعاً باتاً السخرية منهم.", penalty: "باند نهائي" },
+                    { title: "التحدث في السياسة", desc: "يمنع النقاشات السياسية.", penalty: "باند نهائي" },
+                    { title: "التحدث في الدين", desc: "يمنع النقاشات الدينية.", penalty: "باند نهائي" },
+                    { title: "إرسال روابط مشبوهة", desc: "نشر روابط ضارة.", penalty: "باند نهائي" },
+                    { title: "طلب الرتب من الإدارة", desc: "الإلحاح في طلب المناصب.", penalty: "تحذير" },
+                    { title: "الاعتراض على قرار إداري", desc: "الاعتراض في الشات العام.", penalty: "باند 3 أيام" },
+                    { title: "استخدام كلمات بذيئة", desc: "وضعها في أسماء المركبات.", penalty: "باند يومين" },
+                    { title: "الصراخ غير المبرر", desc: "إزعاج الآخرين بالصراخ.", penalty: "تحذير" },
+                    { title: "تشغيل الموسيقى", desc: "تشغيلها في الأماكن العامة بدون سبب.", penalty: "باند يوم" },
+                    { title: "تقليد أصوات الحيوانات", desc: "لغرض إزعاج الناس.", penalty: "باند يوم" },
+                    { title: "استخدام لغة الشوارع الهابطة", desc: "استخدام ألفاظ غير لائقة جداً.", penalty: "تحذير" }
+                ]
+            },
+            {
+                title: "القسم الخامس: قوانين السرقات والرهائن (Robberies)",
+                rules: [
+                    { title: "سرقة البنك بدون شرطة", desc: "يمنع البدء إذا كان عدد الشرطة أقل من المطلوب.", penalty: "باند 3 أيام" },
+                    { title: "قتل الرهينة بعد الاستجابة", desc: "قتل الرهينة رغم تنفيذ الشرطة للمطالب.", penalty: "باند 7 أيام" },
+                    { title: "المطالبة بمبالغ خيالية", desc: "طلب فدية غير منطقية.", penalty: "باند يومين" },
+                    { title: "استخدام طائرة هليكوبتر", desc: "استخدامها في سرقة محل صغير.", penalty: "باند يومين" },
+                    { title: "الهروب  off road بمركبه غير مخصصه", desc: "الهروب بمركبات sporet هو او صغيره في مناطق جبليه .", penalty: "باند 5 أيام" },
+                    { title: "استخدام الرهينة كدرع بشري", desc: "استخدامه بطريقة غير واقعية.", penalty: "باند 3 أيام" },
+                    { title: "سرقة أكثر من بنك", desc: "  القيام بعدة سرقات في نفس الوقت لنفس المجموعة بين كل سرقه و سرقه  15 دقيقه.", penalty: "باند 5 أيام" },
+                    { title: "عدم ترك فرصة للتفاوض", desc: "تجاهل محاولات الشرطة للتواصل.", penalty: "باند 3 أيام" },
+                    { title: "إطلاق النار فوراً", desc: "إطلاق النار عند رؤية الشرطة في السرقة دون تدرج.", penalty: "باند 5 أيام" },
+                    { title: "استخدام أسلحة ثقيلة", desc: "استخدامها في سرقة بقالة.", penalty: "باند يومين" }
+                ]
+            },
+            {
+                title: "القسم السادس: قوانين تقنية وإضافية (Technical & Misc)",
+                rules: [
+                    { title: "استخدام الماكرو (Macros)", desc: "استخدام برامج الأتمتة.", penalty: "باند 10 أيام" },
+                    { title: "تكرار البلاغات (Spam Reports)", desc: "إزعاج الإدارة بتكرار البلاغ.", penalty: "باند يوم" },
+                    { title: "الاختباء تحت الخريطة", desc: "استغلال ثغرات المكان.", penalty: "باند نهائي" },
+                    { title: "ثغرة الدوبليت للأموال", desc: "مضاعفة الأموال بطرق غير مشروعة.", penalty: "باند نهائي" },
+                    { title: "تغيير الملابس بسرعة", desc: "تغيير المظهر أثناء المطاردة.", penalty: "باند 3 أيام" },
+                    { title: "استخدام كروس هير خارجي", desc: "استخدام علامة تصويب خارجية.", penalty: "باند 7 أيام" },
+                    { title: "عدم الإبلاغ عن ثغرة", desc: "التستر على ثغرة تعرفها.", penalty: "باند 5 أيام" },
+                    { title: "استخدام Auto clicker", desc: "يمنع استخدامه لتسهيل التصنيع و التجميع.", penalty: "باند نهائي" },
+                    { title: "سرقة سيارات الإدارة", desc: "سرقة المركبات المخصصة للفعاليات.", penalty: "باند 7 أيام" },
+                    { title: "تخريب الفعاليات الرسمية", desc: "إفساد أنشطة السيرفر الكبرى.", penalty: "باند 10 أيام" },
+                    { title: "استخدام التلي بورت", desc: "الانتقال الآني غير المشروع.", penalty: "باند نهائي" },
+                    { title: "إعطاء الحساب لشخص آخر", desc: "مشاركة بيانات الدخول.", penalty: "باند نهائي" },
+                    { title: "الاعتراض على القوانين", desc: "الاعتراض داخل اللعبة.", penalty: "تحذير" },
+                    { title: "استخدام الراديو وأنت ميت", desc: "التواصل اللاسلكي بعد الموت.", penalty: "باند 3 أيام" },
+                    { title: "تجاهل أوامر الإداري", desc: "عدم الامتثال أثناء التحقيق.", penalty: "باند 7 أيام" },
+                    { title: "الكذب على الإدارة", desc: "تقديم معلومات مضللة في التكت.", penalty: "باند 10 أيام" },
+                    { title: "ملصقات مسيئة", desc: "وضع ملصقات غير لائقة على السيارات.", penalty: "باند 3 أيام" },
+                    { title: "استخدام سكنات ضخمة/صغيرة", desc: "استخدام مظهر غير متناسق جداً.", penalty: "تحذير" },
+                    { title: "القفز المتكرر (Bunny Hopping)", desc: "القفز لتسريع الحركة.", penalty: "تحذير" },
+                    { title: "استخدام الشات للإساءة", desc: "الإساءة للسيرفر عبر الدردشة.", penalty: "باند نهائي" },
+                    { title: "تحريض اللاعبين", desc: "تحريضهم على ترك السيرفر.", penalty: "باند نهائي" }
+                ]
+            },
+            {
+                title: "القسم السابع: قوانين العقارات والاقتصاد (Property & Economy)",
+                rules: [
+                    { title: "غسيل الأموال", desc: "يجب أن يتم عبر سيناريو واقعي وليس مجرد ميكانيكا لعبة.", penalty: "باند 5 أيام" },
+                    { title: "الاحتيال المالي الكبير", desc: "سرقة مبالغ ضخمة عبر وعود وهمية خارج نطاق RP.", penalty: "باند 10 أيام" },
+                    { title: "استخدام المنازل للاختباء", desc: "الاختباء من الشرطة للأبد داخل المنزل.", penalty: "باند 3 أيام" },
+                    { title: "التلاعب بأسعار السوق السوداء", desc: "التلاعب غير المشروع بالأسعار.", penalty: "باند 5 أيام" },
+                    { title: "شراء العقارات بأسماء وهمية", desc: "عدم استخدام الاسم الحقيقي للشخصية.", penalty: "تحذير" },
+                    { title: "استغلال نظام الرواتب (AFK Farming)", desc: "البقاء نشطاً دون لعب للحصول على الراتب.", penalty: "باند 3 أيام" },
+                    { title: "تحويل الأموال بين الشخصيات", desc: "نقل المال بين شخصيات نفس اللاعب.", penalty: "باند نهائي" },
+                    { title: "عدم دفع الضرائب (TAX)", desc: "عدم دفع الضرائب المفروض بها .", penalty: "باند 5 أيام" },
+                    { title: "التهديد بمصادرة الأملاك", desc: "التهديد بدون سبب قانوني.", penalty: "باند 5 أيام" }
 
-        sectionDiv.appendChild(header);
-        sectionDiv.appendChild(content);
-        container.appendChild(sectionDiv);
-    });
-}
+                ]
+            },
+            {
+                title: "القسم الثامن: قوانين تطوير الشخصية والتمثيل (Character & Roleplay)",
+                rules: [
+                    { title: "تغيير الشخصية للهروب", desc: "تغيير الشخصية لتجنب العقاب.", penalty: "باند 10 أيام" },
+                    { title: "تمثيل الإصابة", desc: "يجب تمثيل الألم عند الحوادث أو إطلاق النار.", penalty: "باند يومين" },
+                    { title: "استخدام الأدوات (Props)", desc: "استخدامها بطريقة غير واقعية.", penalty: "باند يوم" },
+                    { title: "تجاهل الكاميرات", desc: "تجاهل وجود كاميرات مراقبة في الأماكن العامة.", penalty: "تحذير" },
+                    { title: "التمثيل بأنك سوبر هيرو", desc: "القيام بأفعال خارقة للعادة.", penalty: "باند 5 أيام" },
+                    { title: "عدم الالتزام بقصة الشخصية", desc: "مخالفة الـ Backstory الخاصة بك.", penalty: "تحذير" },
+                    { title: "استخدام معلومات الستريم", desc: "استخدام معلومات البث المباشر (Stream Sniping).", penalty: "باند نهائي" },
+                    { title: "التدخل في سيناريوهات الآخرين", desc: "التدخل بدون سبب.", penalty: "باند 3 أيام" },
+                    { title: "إجبار اللاعبين على مشاهد غير لائقة", desc: "الإكراه على تمثيل مشاهد غير أخلاقية.", penalty: "باند نهائي" },
+                    { title: "استخدام الكلبشات", desc: "استخدامها بدون سبب درامي.", penalty: "باند 3 أيام" },
+                    { title: "الهروب من السجن", desc: "الهروب بطريقة غير واقعية.", penalty: "باند 7 أيام" },
+                    { title: "تمثيل السكر المبالغ فيه", desc: "لغرض الإزعاج فقط.", penalty: "تحذير" },
+                    { title: "استخدام الأقنعة", desc: "استخدامها في كل الأوقات بدون سبب.", penalty: "تحذير" },
+                    { title: "تجاهل أوامر المفاوض", desc: "عدم الامتثال في السرقات.", penalty: "باند 3 أيام" },
+                    { title: "الاعتراف بالجرائم (FailRP)", desc: "الاعتراف بدون ضغط درامي.", penalty: "باند يومين" }
+                ]
+            }
+        ];
 
-document.addEventListener('DOMContentLoaded', createRulesSections);
-</script>
+        function createRulesSections() {
+            const container = document.getElementById('rulesContainer');
+            rulesData.forEach((section, index) => {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'rule-section';
 
+                const header = document.createElement('button');
+                header.className = 'rule-header' + (index === 0 ? ' active' : '');
+                header.innerHTML = `
+                    <span>${section.title}</span>
+                    <span class="chevron">▼</span>
+                `;
+
+                const content = document.createElement('div');
+                content.className = 'rule-content' + (index === 0 ? ' active' : '');
+
+                section.rules.forEach(rule => {
+                    const ruleItem = document.createElement('div');
+                    ruleItem.className = 'rule-item';
+                    ruleItem.innerHTML = `
+                        <div class="rule-item-title">${rule.title}</div>
+                        <div class="rule-item-desc">${rule.desc}</div>
+                        <span class="rule-penalty">${rule.penalty}</span>
+                    `;
+                    content.appendChild(ruleItem);
+                });
+
+                header.addEventListener('click', () => {
+                    const isActive = header.classList.contains('active');
+                    document.querySelectorAll('.rule-header').forEach(h => h.classList.remove('active'));
+                    document.querySelectorAll('.rule-content').forEach(c => c.classList.remove('active'));
+
+                    if (!isActive) {
+                        header.classList.add('active');
+                        content.classList.add('active');
+                    }
+                });
+
+                sectionDiv.appendChild(header);
+                sectionDiv.appendChild(content);
+                container.appendChild(sectionDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', createRulesSections);
+    </script>
+</body>
+</html>ا
+    </script>
 </body>
 </html>
-
